@@ -133,12 +133,17 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
         }
 
+        // Format Creation Time
+        const createdDate = new Date(task.createdAt);
+        const timeString = createdDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
         card.innerHTML = `
             <div class="task-info">
                 <h3>${task.title} ${statusBadge}</h3>
                 <p>${task.description || 'No description provided.'}</p>
                 <div class="meta-data">
                     <span><i class="fa-regular fa-clock"></i> Due: ${dateString}</span>
+                    <span><i class="fa-solid fa-hourglass-start"></i> Created: ${timeString}</span>
                 </div>
             </div>
             <div class="task-actions">
