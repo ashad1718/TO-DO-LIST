@@ -302,7 +302,10 @@ textarea:focus {
         height: auto;
         /* Let content dictate height */
         flex-direction: row;
-        padding: 0.5rem 1rem;
+        padding: 0.5rem 1rem 1.5rem 1rem;
+        /* Added extra bottom padding */
+        padding-bottom: calc(1.5rem + env(safe-area-inset-bottom));
+        /* Safe area support */
         border-right: none;
         border-top: 1px solid var(--glass-border);
         background: rgba(15, 23, 42, 0.95);
