@@ -103,7 +103,8 @@ body {
     padding: 2rem;
     overflow-y: auto;
     position: relative;
-    background: transparent; /* Already glass in app-container or override here if needed */
+    background: transparent;
+    /* Already glass in app-container or override here if needed */
     border: none;
     box-shadow: none;
 }
@@ -118,8 +119,15 @@ body {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 header {
@@ -148,7 +156,8 @@ header p {
     font-size: 0.9rem;
 }
 
-input, textarea {
+input,
+textarea {
     width: 100%;
     padding: 12px;
     background: rgba(0, 0, 0, 0.2);
@@ -160,7 +169,8 @@ input, textarea {
     transition: border-color 0.3s;
 }
 
-input:focus, textarea:focus {
+input:focus,
+textarea:focus {
     outline: none;
     border-color: var(--primary-color);
 }
@@ -266,4 +276,108 @@ input:focus, textarea:focus {
 .badge-late {
     background: rgba(239, 68, 68, 0.2);
     color: var(--danger-color);
+}
+
+/* --- Mobile Responsive Styles --- */
+@media (max-width: 768px) {
+    body {
+        /* Reset centering for full screen feel */
+        align-items: flex-start;
+        background: var(--bg-gradient-start);
+        /* Simplify bg for mobile perf if needed, or keep gradient */
+    }
+
+    .app-container {
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0;
+        border: none;
+        flex-direction: column-reverse;
+        /* Nav at bottom */
+    }
+
+    /* Transform Sidebar to Bottom Nav */
+    .sidebar {
+        width: 100%;
+        height: auto;
+        /* Let content dictate height */
+        flex-direction: row;
+        padding: 0.5rem 1rem;
+        border-right: none;
+        border-top: 1px solid var(--glass-border);
+        background: rgba(15, 23, 42, 0.95);
+        /* More opaque for readibility */
+        z-index: 100;
+        justify-content: center;
+        /* Center the nav items container */
+    }
+
+    .logo {
+        display: none;
+        /* Hide logo on mobile to save space */
+    }
+
+    .nav-links {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        gap: 0;
+    }
+
+    .nav-item {
+        flex-direction: column;
+        gap: 4px;
+        padding: 8px 12px;
+        border-radius: 8px;
+        text-align: center;
+        flex: 1;
+        /* Distribute space evenly */
+        justify-content: center;
+    }
+
+    .nav-item i {
+        font-size: 1.2rem;
+        margin-bottom: 2px;
+    }
+
+    .nav-item span {
+        font-size: 0.7rem;
+        font-weight: 500;
+    }
+
+    /* Adjust Main Content */
+    .main-content {
+        padding: 1.5rem;
+        /* Ensure specific scrolling behavior if needed */
+        overscroll-behavior-y: contain;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    /* Task Cards */
+    .task-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .task-info {
+        width: 100%;
+    }
+
+    .task-actions {
+        width: 100%;
+        justify-content: flex-end;
+        border-top: 1px solid var(--glass-border);
+        padding-top: 0.8rem;
+        margin-top: 0.2rem;
+    }
+
+    .action-btn {
+        width: 40px;
+        height: 40px;
+        /* Larger touch targets */
+    }
 }
