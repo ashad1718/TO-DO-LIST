@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Task Manager</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar glass-panel">
+            <div class="logo">
+                <i class="fa-solid fa-layer-group"></i>
+                <span>TaskFlow</span>
+            </div>
+            <ul class="nav-links">
+                <li class="nav-item active" data-tab="new-task">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>New Task</span>
+                </li>
+                <li class="nav-item" data-tab="scheduled">
+                    <i class="fa-regular fa-calendar"></i>
+                    <span>Scheduled</span>
+                </li>
+                <li class="nav-item" data-tab="in-progress">
+                    <i class="fa-solid fa-spinner"></i>
+                    <span>In Progress</span>
+                </li>
+                <li class="nav-item" data-tab="completed">
+                    <i class="fa-solid fa-check-circle"></i>
+                    <span>Completed</span>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content glass-panel">
+            <!-- New Task Tab -->
+            <section id="new-task" class="tab-content active">
+                <header>
+                    <h1>Create New Task</h1>
+                    <p>Organize your day, one task at a time.</p>
+                </header>
+                <form id="add-task-form">
+                    <div class="form-group">
+                        <label for="task-title">Title</label>
+                        <input type="text" id="task-title" placeholder="e.g., Design System Update" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="task-desc">Description</label>
+                        <textarea id="task-desc" placeholder="Details about your task..." rows="4"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="task-date">Due Date</label>
+                        <input type="date" id="task-date" required>
+                    </div>
+                    <button type="submit" class="btn-primary">
+                        <i class="fa-solid fa-plus"></i> Add Task
+                    </button>
+                </form>
+            </section>
+
+            <!-- Scheduled Tab -->
+            <section id="scheduled" class="tab-content">
+                <header>
+                    <h1>Scheduled Tasks</h1>
+                    <p>Upcoming tasks on your calendar.</p>
+                </header>
+                <div class="task-list" id="scheduled-list">
+                    <!-- Tasks will be injected here -->
+                </div>
+            </section>
+
+            <!-- In Progress Tab -->
+            <section id="in-progress" class="tab-content">
+                <header>
+                    <h1>In Progress</h1>
+                    <p>Tasks you are currently working on.</p>
+                </header>
+                <div class="task-list" id="in-progress-list">
+                    <!-- Tasks will be injected here -->
+                </div>
+            </section>
+
+            <!-- Completed Tab -->
+            <section id="completed" class="tab-content">
+                <header>
+                    <h1>Completed</h1>
+                    <p>History of your accomplishments.</p>
+                </header>
+                <div class="task-list" id="completed-list">
+                    <!-- Tasks will be injected here -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
