@@ -182,6 +182,57 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // --- Notification Logic ---
+    function requestNotificationPermission() {
+        if ('Notification' in window && Notification.permission !== 'granted') {
+            Notification.requestPermission();
+        }
+    }
+
+    function checkNotifications() {
+        if (Notification.permission !== 'granted') return;
+
+        const now = new Date();
+        const todayString = now.toDateString();
+
+        // 1. Daily 7 AM Reminder
+        const lastDailyReminder = localStorage.getItem('lastDailyReminder');
+        if (now.getHours() === 7 && now.getMinutes() === 0 && lastDailyReminder !== todayString) {
+            const pendingCount = tasks.filter(t => t.status !== 'completed').length;
+            if (pendingCount > 0) {
+                new Notification('Morning Reminder', {
+                    body: `You have ${pendingCount} tasks pending today. Time to get to work!`,
+                    icon: 'https://cdn-icons-png.flaticon.com/512/2693/2693507.png' // Generic icon or app icon
+                });
+                localStorage.setItem('lastDailyReminder', todayString);
+            }
+        }
+
+        // 2. Overdue Check
+        tasks.forEach(task => {
+            if (task.status !== 'completed' && !task.notifiedOverdue) {
+                const dueDate = new Date(task.dueDate);
+                // Set due date to end of day logic or exact time if we had it, keeping simple for date-only inputs
+                dueDate.setHours(23, 59, 59);
+
+                if (now > dueDate) {
+                    new Notification('Task Overdue', {
+                        body: `Is your "${task.title}" task done? It was due on ${task.dueDate}.`,
+                        icon: 'https://cdn-icons-png.flaticon.com/512/564/564619.png'
+                    });
+
+                    // Mark as notified so we don't spam every minute
+                    task.notifiedOverdue = true;
+                    saveTasks(); // Save this flag
+                }
+            }
+        });
+    }
+
+    // Initialize Notifications
+    requestNotificationPermission();
+    setInterval(checkNotifications, 60000); // Check every minute
+
     // Initial render
     renderTasks();
 });
